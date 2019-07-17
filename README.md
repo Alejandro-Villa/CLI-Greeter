@@ -7,7 +7,7 @@ To use this script you need to add it to your `.bashrc` (or equivalent), it'll r
 
 ### Syntax
 
-run this in your terminal to use it with the default famous people quoutes
+Run this in your terminal to use it with the default famous people quoutes
 `./CLI-Greeter quotes/famous_people`
 
 If you want to run it with a custom article, just give its route as an argument.
