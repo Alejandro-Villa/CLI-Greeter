@@ -7,46 +7,57 @@
 #
 # Version 2.0
 
-columns=$(tput cols) # Get total of columns of the terminal window
+columns="$(tput cols)" # Get total of columns of the terminal window
+file=$(cat -E $1)
+delimiter="#"
+quotes_array=()
+quote_index=0
+for i in ${file[*]}; do  
+    if [[ "$i" = *"$delimiter"* ]]; then
+        quote_index="$(($quote_index+1))"
+    else
+        quotes_array[$quote_index]="${quotes_array[$quote_index]}"" ""$i"
+    fi
+done
 
 i=0
-while read -r LINE 
-do
-    quotes_array[$i]=$LINE
-    i=$i+1
-done < $1
+while [[ $i -lt $quote_index ]]; do
+    echo "${quotes_array[$i]}"
+    i=$((i+1))
+done
 
 # Selects a random quote from the array using the system time as a seed
 RANDOM=$$$(date +%s)
 selected_quote=${quotes_array[$(($RANDOM % ${#quotes_array[@]}))]}
 
 # Splits the quoute into the actual text and the author
-IFS='\' read -ra printable_array <<< $selected_quote
+IFS='$' read -ra printable_array <<< $selected_quote
 
 # Now the tricky part. Centering and cutting the edges out. For this I have used 
 # printf and a simple for loop with the chosen length of the quote on-screen
 
 line_size=$(($columns - 10)) # setting line size as columns
-printable_array[1]=${printable_array[1]:1:${#printable_array[1]}} # Removing the 'a' 
-
+#printable_array[1]=${printable_array[1]:1:${#printable_array[1]}} # Removing the 'a' 
 
 # Printing the quote
-if [[ ${#printable_array[0]} -lt $line_size ]]; then
-    printf "%*s\n" $(( (${#printable_array[0]} + $columns) / 2 )) "${printable_array[0]}"
-    printf "%*s\n" $(( (${#printable_array[1]} + $columns) / 2 )) "${printable_array[1]}"
-else
-    line_number=$(( ${#printable_array[0]} / $line_size  ))
 
-    if [[ $line_number*$line_size -ne ${#printable_array[0]} ]]; then
+for ((i=0; i < ${#printable_array[@]}; i++)); do
+
+    if [[ ${#printable_array[$i]} -lt $line_size ]]; then
+        printf "%*s\n" $(( (${#printable_array[$i]}+ $columns) / 2  )) "${printable_array[$i]}"
+    else
+        line_number=$(( ${#printable_array[$i]} / $line_size  ))
+
+        if [[ $line_number*$line_size -ne ${#printable_array[$i]} ]]; then
         line_number=$(($line_number + 1))
-    fi
+        fi
 
-    iterator=0
-    for (( i = 1; i <= $line_number; i++ )); do
-        tmp=${printable_array[0]:$iterator:$(( $columns - 20 ))}
-        printf "%*s\n" $(( (${#tmp} + $columns) / 2  )) "$tmp"
-        iterator=$(( $iterator + $(( $columns - 20 )) ))
-    done
-
-    printf "%*s\n" $(( (${#printable_array[1]} + $columns) / 2  )) "${printable_array[1]}"
+        iterator=0
+        for (( i = 1; i <= $line_number; i++ )); do
+            tmp=${printable_array[$i]:$iterator:$(( $columns - 20 ))}
+            printf "%*s\n" $(( (${#tmp} + $columns) / 2  )) "$tmp"
+            iterator=$(( $iterator + $(( $columns - 20 )) ))
+        done
 fi
+
+done
