@@ -3,19 +3,19 @@ A little bash script that greets you with your selection of quotes
 
 ## Detailed description and use.
 
-To use this script you need to add it to your `.bashrc` (or equivalent), it'll run every time you start your terminal and choose a random quote and display it centered on the screen.
+If you want this script to greet you when you open your CLI, you need to add it to your `.bashrc` (or equivalent). It'll run every time you start your terminal and choose a random quote and display it centered on the screen.
 
 ### Syntax
 
-run this in your terminal to use it with the default famous people quoutes
+Run this in your terminal to use it with the default famous people quoutes
 `./CLI-Greeter quotes/famous_people`
 
-If you want to run it with a custom article, just give its route as an argument.
+If you want to run it with a custom file, just give its route as an argument.
 
 ### Quotes format.
 
-- Each quote goes in a separate line. (Quotes delimiter is the newline character `\n`
-- The author and the text are separated by `\a` (I know this character is the BELL one, I accept suggestions to a better delimiter)
+- The script interprets `$` as a newline character (it ignores the file newlines). This way it supports multiline quotes and texts. The author-quote separation is also indicated by `$`
+- The quote delimiter is `#`. It must follow each quote, separated from the last word by a space. Except the last quote, which doesn¡t require it.
 
 ## To-do list
 

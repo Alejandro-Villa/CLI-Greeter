@@ -5,7 +5,7 @@
 # The printed string will be centered and cropped out leaving 20 columns on each 
 # side of the terminal.
 #
-# Version 2.0
+# Version 3.0
 
 columns="$(tput cols)" # Get total of columns of the terminal window
 file=$(cat -E $1)
@@ -18,12 +18,6 @@ for i in ${file[*]}; do
     else
         quotes_array[$quote_index]="${quotes_array[$quote_index]}"" ""$i"
     fi
-done
-
-i=0
-while [[ $i -lt $quote_index ]]; do
-    echo "${quotes_array[$i]}"
-    i=$((i+1))
 done
 
 # Selects a random quote from the array using the system time as a seed
