@@ -10,13 +10,13 @@
 columns=$(tput cols) # Get total of columns of the terminal window
 
 quotes_array=(
-"Es preciso soñar, pero con la condición de creer en nuestros sueños. De examinar con atención la vida real, de confrontar nuestra observación con nuestros sueños, y de realizar escrupulosamente nuestra fantasía.\n--Vladimir \"Lenin\" Ilych Ulyanov" 
-"Que entre los marxistas no hay completa unanimidad, es cierto..., este hecho no demuestra la debilidad, sino precisamente la fuerza y la vitalidad de la socialdemocracia rusa.\n--Vladimir \"Lenin\" Ilych Ulyanov" 
-"No hay teoría revolucionaria sin práctica revolucionaria y viceversa.\n--Vladimir \"Lenin\" Ilych Ulyanov" 
-"La revolución no se hace, sino que se organiza.\n--Vladimir \"Lenin\" Ilych Ulyanov" 
-"Salvo el poder, todo es ilusión.\n--Vladimir \"Lenin\" Ilych Ulyanov" 
-"Si no eres parte de la solución, eres parte del problema, ¡actúa!\n--Vladimir \"Lenin\" Ilych Ulyanov" 
-"El Estado es el arma de represión de una clase sobre otra.\n--Vladimir \"Lenin\" Ilych Ulyanov"
+"Las especies que sobreviven no son las más fuertes, ni las más rápidas, ni las más inteligentes; sino aquellas que se adaptan mejor al cambio.\n-- Charles Darwin"
+"Las grandes almas siempre se han encontrado con una oposición violenta de las mentes mediocres.\n-- Albert Einstein"
+"La religión es el opio del pueblo.\n-- Karl Marx"
+"Si la montaña no viene a ti, ve tú a la montaña.\n-- Mahoma"
+"Nuestra mayor gloria no está en no caer nunca, sino en levantarnos cada vez que caemos.\n-- Confucio"
+"No hay camino para la verdad, la verdad es el camino.\n-- Mahatma Gandhi"
+"Hijo mío, la felicidad está hecha de pequeñas cosas, un pequeño yate, una pequeña mansión, una pequeña fortuna.\n-- Groucho Marx"
 )
 
 # Selects a random quote from the array using the system time as a seed
