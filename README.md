@@ -14,8 +14,8 @@ If you want to run it with a custom file, just give its route as an argument.
 
 ### Quotes format.
 
-- Each quote goes in a separate line. (Quotes delimiter is the newline character `\n`)
-- The author and the text are separated by `\a` (I know this character is the BELL one, I accept suggestions to a better delimiter)
+- Now the script supports multiline quotes. Each new line is marked with `$` or with a new line in the text file
+- The character delimiter for the author is now invalid: also `$` will be used. Including author is not necessary now.
 
 ## To-do list
 
