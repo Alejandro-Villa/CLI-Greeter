@@ -1,5 +1,11 @@
 # CLI-Greeter
+
 A little bash script that greets you with your selection of quotes
+
+## Installation Process
+1. First of all, clone the git repo into your machine (`git clone git@github.com:Alejandro-Villa/CLI-Greeter.git`), if you don't have git you can download it from your distro repositories. More info about git [here](https://wiki.archlinux.org/index.php/Git).
+
+2. Once you've cloned the repo, you are ready to launch the script. Make sure it has the correct permissions (if not, run `chmod u+x CLI-Greeter.sh` inside the repo directory). You can launch the script with `./CLI-Greeter.sh quotes/famous_people`, make sure to give it the sile as argument. 
 
 ## Detailed description and use.
 
