@@ -32,3 +32,8 @@ I have included in `.gitignore` the file `quotes/personal`. You can put your per
 * Make it so it doesn't split up words.
 * Make it compatible with Shell (not only bash)
 
+## License and Contact Information.
+
+This work is licensed with GPLv3.0. See the [license](https://github.com/Alejandro-Villa/CLI-Greeter/blob/master/LICENSE) for more information. 
+
+You can contact me through GitHub or at `awewanwo@disroot.org`. I'm happy to answer any questions

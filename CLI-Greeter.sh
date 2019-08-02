@@ -1,16 +1,34 @@
 #!/bin/bash
-# Author: Alejandro Villanueva (Github: Alejandro-Villa)
-# Date: 16th July 2019
+# CLI-Greeter: This programm greets you with random quotes when run. 
+#     Copyright (C) 2019  Alejandro Villanueva Prados
+# 
+#     This program is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+# 
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+# 
+#     You should have received a copy of the GNU General Public License
+#     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#	  
+#	  Contact information:
+#		GitHub: Alejandro-Villa
+#		E-mail: awewanwo@disroot.org
+#
+#
 # Brief description: Prints a random quote from the array given. 
 # The printed string will be centered and cropped out leaving 20 columns on each 
 # side of the terminal.
-#
-# Version 3.0
 
-help="Help placeholder."
 
-if [[ $# != 1 ]]; then
-	echo $help
+help="Usage of this program:\n\t./CLI-Greeter <path-to-quote-file>\nOther usage, running\n\t./CLI-Greeter <-h | --help>\nwill show this message"
+
+if [[ $# != 1 ]] || [[ "$2"=="-h" ]] || [[  "$2"=="--help" ]]; then
+	echo -e $help
 else
 
 	columns="$(tput cols)" # Get total of columns of the terminal window
