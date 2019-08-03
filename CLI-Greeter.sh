@@ -27,7 +27,7 @@
 
 help="Usage of this program:\n\t./CLI-Greeter <path-to-quote-file>\nOther usage, running\n\t./CLI-Greeter <-h | --help>\nwill show this message"
 
-if [[ $# != 1 ]] || [[ "$2"=="-h" ]] || [[  "$2"=="--help" ]]; then
+if [[ "$#" -ne 1 ]] || [[ "$1" == "-h" ]] || [[  "$1" == "--help" ]]; then
 	echo -e $help
 else
 
