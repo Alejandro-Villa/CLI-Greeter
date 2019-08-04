@@ -19,6 +19,7 @@
 #		GitHub: Alejandro-Villa
 #		E-mail: awewanwo@disroot.org
 #
+# Version: 1.0 
 #
 # Brief description: Prints a random quote from the array given. 
 # The printed string will be centered and cropped out leaving 20 columns on each 
