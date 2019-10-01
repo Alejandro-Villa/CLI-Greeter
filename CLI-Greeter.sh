@@ -25,6 +25,9 @@
 # The printed string will be centered and cropped out leaving 20 columns on each 
 # side of the terminal.
 
+bash
+# open bash shell no matter what the current shell is
+
 
 help="Usage of this program:\n\t./CLI-Greeter <path-to-quote-file>\nOther usage, running\n\t./CLI-Greeter <-h | --help>\nwill show this message"
 
@@ -81,3 +84,6 @@ else
 	
 	done
 fi
+
+exit
+# exit the bash shell & return to default shell
