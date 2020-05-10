@@ -39,10 +39,10 @@ I have included in `.gitignore` the file `quotes/personal`. You can put your per
 
 ## To-do list
 
-[x] Make it so you can change the quoutes without editing the code (preferably with a plain text file next to the script).
-[x] Make it so it doesn't split up words.
-[x] Make it compatible with Shell (not only bash).
-[] Add meaningful errors and a integrated help.
+- **DONE** Make it so you can change the quoutes without editing the code (preferably with a plain text file next to the script).
+- **DONE** Make it so it doesn't split up words.
+- *Not needed anymore* Make it compatible with Shell (not only bash).
+- Add meaningful errors and a integrated help.
 
 ## License and Contact Information.
 
