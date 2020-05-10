@@ -1,7 +1,7 @@
+use rand::seq::SliceRandom;
 use std::env;
 use std::fs;
-use terminal_size::{Width, Height, terminal_size};
-use rand::seq::SliceRandom;
+use terminal_size::{terminal_size, Height, Width};
 
 struct Quote {
     text: String,
@@ -12,8 +12,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let quotes_file = &args[1];
 
-    let contents = fs::read_to_string(quotes_file)
-        .expect("Error de apertura");
+    let contents = fs::read_to_string(quotes_file).expect("Error de apertura");
 
     let parsed = parse_contents(contents);
     let selected_opt = parsed.choose(&mut rand::thread_rng());
@@ -71,7 +70,7 @@ fn get_author(contents: String) -> String {
     let ind = copy.find('\"');
 
     if let Some(i) = ind {
-        let author = copy.split_off(i+1);
+        let author = copy.split_off(i + 1);
         return author;
     } else {
         panic!("Quotes must be enclosed in \"\"");
@@ -84,26 +83,20 @@ fn show_quote(cite: &Quote) {
         let w_total = usize::from(w_raw);
 
         if w_total > cite.text.len() + 20 {
-            println!("{cita:^width$}\n{author:^width$}", 
-                     cita=cite.text,
-                     author=cite.author, 
-                     width=w_total
-                     );
+            println!(
+                "{cita:^width$}\n{author:^width$}",
+                cita = cite.text,
+                author = cite.author,
+                width = w_total
+            );
         } else {
             let parts = split_to_fit(&cite.text, w_total);
             for p in parts {
-                println!("{cita:^width$}",
-                         cita=p,
-                         width=w_total
-                         );
+                println!("{cita:^width$}", cita = p, width = w_total);
             }
-            println!("{author:^width$}", 
-                     author=cite.author,
-                     width=w_total
-                     );
+            println!("{author:^width$}", author = cite.author, width = w_total);
         }
-    }
-    else {
+    } else {
         println!("Width not found!!");
     }
 }
@@ -125,6 +118,6 @@ fn split_to_fit(text: &String, space: usize) -> Vec<String> {
             lines.last_mut().unwrap().push(' ');
         }
     }
-    
+
     return lines;
 }
