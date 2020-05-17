@@ -1,9 +1,12 @@
+/// Script that takes a quote from a external file and shows it centered on the command line
+/// interface.
 use rand::seq::SliceRandom;
 use std::env;
 use std::fs;
 use terminal_size::{terminal_size, Height, Width};
 
-struct Quote {
+/// Struct that holds information about a quote and its author.
+pub struct Quote {
     text: String,
     author: String,
 }
@@ -22,7 +25,18 @@ fn main() {
     }
 }
 
-fn parse_contents(contents: String) -> Vec<Quote> {
+/// Function that parses the whole file contents, returns a `Vec<Quote>`.
+///
+/// # Examples.
+///
+/// Parses one `Quote`.
+///
+/// ```rust
+///     let String text = "\"This is a quote\" this is the author";
+///     let quotes = parse_contents(text);
+/// ```
+
+pub fn parse_contents(contents: String) -> Vec<Quote> {
     let lines = contents.lines();
     let lines_vec: Vec<&str> = lines.collect();
 
@@ -40,7 +54,7 @@ fn parse_contents(contents: String) -> Vec<Quote> {
     return quotes_list;
 }
 
-fn get_quote(contents: String) -> String {
+pub(crate) fn get_quote(contents: String) -> String {
     if contents.chars().next().unwrap() != '\"' {
         panic!("Quote must start with \"");
     }
@@ -49,17 +63,23 @@ fn get_quote(contents: String) -> String {
     assert_eq!(copy.remove(0), '\"');
 
     let mut cite = String::new();
+    let mut enclosed = false;
     for c in copy.chars() {
         if c == '\"' {
+            enclosed = true;
             break;
         }
         cite.push(c);
     }
 
+    if !enclosed {
+        panic!("Quote must end with \"");
+    }
+
     return cite;
 }
 
-fn get_author(contents: String) -> String {
+pub(crate) fn get_author(contents: String) -> String {
     if contents.chars().next().unwrap() != '\"' {
         panic!("Quote must start with \"");
     }
@@ -73,11 +93,11 @@ fn get_author(contents: String) -> String {
         let author = copy.split_off(i + 1);
         return author;
     } else {
-        panic!("Quotes must be enclosed in \"\"");
+        panic!("Quote must end with \"");
     }
 }
 
-fn show_quote(cite: &Quote) {
+pub(crate) fn show_quote(cite: &Quote) {
     let size = terminal_size();
     if let Some((Width(w_raw), Height(_h))) = size {
         let w_total = usize::from(w_raw);
@@ -101,7 +121,7 @@ fn show_quote(cite: &Quote) {
     }
 }
 
-fn split_to_fit(text: &String, space: usize) -> Vec<String> {
+pub(crate) fn split_to_fit(text: &String, space: usize) -> Vec<String> {
     let copy = String::from(text);
 
     let words: Vec<&str> = copy.split_whitespace().collect();
@@ -120,4 +140,60 @@ fn split_to_fit(text: &String, space: usize) -> Vec<String> {
     }
 
     return lines;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_parse_contents() {
+        let text = "\"My quote\" my author".to_string();
+        let quotes = parse_contents(text);
+
+        assert_eq!(quotes[0].text, "My quote");
+        assert_eq!(quotes[0].author, " my author");
+    }
+
+    #[test]
+    fn test_empty_string() {
+        let text: String = String::new();
+        let quotes = parse_contents(text);
+
+        assert!(quotes.is_empty());
+    }
+
+    #[test]
+    fn test_get_quote() {
+        let text = "\"a quote\"".to_string();
+
+        assert_eq!(get_quote(text), "a quote");
+    }
+
+    #[test]
+    #[should_panic(expected = "Quote must start with \"")]
+    fn bad_format_quote() {
+        let text = String::from("no quotes quote");
+
+        let quote = get_quote(text);
+        println!("Result: {}", quote);
+    }
+
+    #[test]
+    #[should_panic(expected = "Quote must end with \"")]
+    fn not_enclosed_quote_newline() {
+        let text = String::from("\"Is this a quote\n");
+
+        let quote = get_quote(text);
+        println!("Result: {}", quote);
+    }
+
+    #[test]
+    #[should_panic(expected = "Quote must end with \"")]
+    fn not_enclosed_quote() {
+        let text = String::from("\"Is this a quote");
+
+        let quote = get_quote(text);
+        println!("Result: {}", quote);
+    }
 }
